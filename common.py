@@ -9,6 +9,16 @@ import logging
 import argparse
 import json
 
+def longest_timestamped_prefix_length(dictionary, text, startposition) -> int:
+	""" find the longest prefix of text in dictionary """
+	prefix = ''
+	for char in text[startposition:]:
+		prefix += char
+		if prefix not in dictionary:
+			return len(prefix)-1
+		if dictionary[prefix][1] >= startposition:
+			return len(prefix)-1
+	return len(prefix)
 
 def log_factor(name : str, parent_id, newchar, factor, factor_id, textposition, textlength, num_factors : int):
 	if not logging.getLogger().isEnabledFor(logging.DEBUG):

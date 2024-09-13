@@ -25,16 +25,6 @@ def lz78_timestamped_dict(text) -> dict:
 			parent_id = dictionary[current_factor][0]
 	return dictionary
 
-def longest_timestamped_prefix_length(dictionary, text, startposition) -> int:
-	""" find the longest prefix of text in dictionary """
-	prefix = ''
-	for char in text[startposition:]:
-		prefix += char
-		if prefix not in dictionary:
-			return len(prefix)-1
-		if dictionary[prefix][1] >= startposition:
-			return len(prefix)-1
-	return len(prefix)
 
 
 def fp78(text):
@@ -43,12 +33,12 @@ def fp78(text):
 	textpos = 0
 	factorization = []
 	while textpos < len(text):
-		potential_factor_length = longest_timestamped_prefix_length(dictionary, text, textpos)+1
+		potential_factor_length = C.longest_timestamped_prefix_length(dictionary, text, textpos)+1
 		current_length = potential_factor_length
 		combined_length = 0
 		if current_length < len(text[textpos:]):
 			for i in range(1,potential_factor_length+1):
-				potential_subsequent_factor_length = longest_timestamped_prefix_length(dictionary, text, textpos+i)
+				potential_subsequent_factor_length = C.longest_timestamped_prefix_length(dictionary, text, textpos+i)
 				if potential_subsequent_factor_length+i >= combined_length:
 					current_length = i
 					combined_length = potential_subsequent_factor_length+i
