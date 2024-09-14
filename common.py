@@ -102,4 +102,4 @@ def main(description : str, name : str, can_decode : bool, compressor, decoder, 
 	if logging.getLogger().isEnabledFor(logging.DEBUG):
 		assert inputtext == decodetester(lz78phrases,inputtext), f'{inputtext} != {decodetester(lz78phrases, inputtext)}'
 	if args.stats:
-		print(f'file={filename} length={len(inputtext)} factors={len(lz78phrases)}')
+		print(f'RESULT scheme={name} file={filename} length={len(inputtext)} factors={len(lz78phrases)}')
