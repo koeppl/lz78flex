@@ -24,9 +24,10 @@ def fpa78(text):
 		potential_factor_length = C.longest_timestamped_prefix_length(dictionary, text, textpos)+1
 		current_length = potential_factor_length
 		combined_length = 0
+		potential_subsequent_factor_length = 0
 		if current_length < len(text[textpos:]):
 			for i in range(1,potential_factor_length+1):
-				potential_subsequent_factor_length = C.longest_timestamped_prefix_length(dictionary, text, textpos+i)
+				potential_subsequent_factor_length = max(1, C.longest_timestamped_prefix_length(dictionary, text, textpos+i))
 				if potential_subsequent_factor_length+i >= combined_length:
 					current_length = i
 					combined_length = potential_subsequent_factor_length+i
@@ -40,6 +41,8 @@ def fpa78(text):
 		parent_id = dictionary[current_factor[:-1]][0] if len(current_factor) >= 2 else 0
 		textpos += current_length
 		factorization.append((parent_id, current_factor[-1]))
+		logging.debug('dic %s', str(dictionary))
+		logging.debug('longest match %d current length % d combined length %d pot second %d', potential_factor_length, current_length, combined_length, potential_subsequent_factor_length)
 		C.log_factor('fpa', parent_id, current_factor[-1], current_factor, len(dictionary) + 1, textpos, len(text), len(factorization))
 
 	return factorization

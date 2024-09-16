@@ -63,7 +63,7 @@ def main(description : str, name : str, can_decode : bool, compressor, decoder, 
 
 	logging.basicConfig(stream=sys.stderr, level=args.loglevel.upper() )
 
-	if args.test or logging.getLogger().isEnabledFor(logging.DEBUG):
+	if args.test: # or logging.getLogger().isEnabledFor(logging.DEBUG):
 		logging.debug('start test')
 		tester()
 		logging.debug('end test')
