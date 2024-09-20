@@ -27,7 +27,7 @@ def fpa78(text):
 		potential_subsequent_factor_length = 0
 		if current_length < len(text[textpos:]):
 			for i in range(1,potential_factor_length+1):
-				potential_subsequent_factor_length = max(1, C.longest_timestamped_prefix_length(dictionary, text, textpos+i))
+				potential_subsequent_factor_length = C.longest_timestamped_prefix_length(dictionary, text, textpos+i)+1
 				if potential_subsequent_factor_length+i >= combined_length:
 					current_length = i
 					combined_length = potential_subsequent_factor_length+i
